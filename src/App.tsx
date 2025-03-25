@@ -45,8 +45,12 @@ function App() {
     }}>
       <h1>Demo</h1>
       <div className="card game-input">
+        <div>
+          {attempts.map((x, i) => <p key={i}>{x}</p>)}
+        </div>
         <div className='flex'>
-          <input type="text" className='input'/>
+          <input type="text" className='input'
+            onInput={(e) => {setCurrentWord((e.target as HTMLInputElement).value)}} value={currentWord}/>
           <button type="submit" className='btn btn-primary' onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
