@@ -42,6 +42,6 @@
 }
 
 .game-input input[type=text] {
-  width: 2ch;
+  width: 6ch;
   text-align: center;
 }

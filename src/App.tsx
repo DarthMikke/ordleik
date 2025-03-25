@@ -10,37 +10,49 @@ function LetterInput() {
 }
 
 type GameContext = {
-  currentLetterIndex: number
-  currentWord: string[]
+  attempts: string[]
+  currentWord: string
+  setCurrentWord: (newWord: string) => void
+  submit: () => void
   solution: string
 }
 
 const gameContext = createContext<GameContext>({
-  currentLetterIndex: 0,
-  currentWord: ['', '', '', '', ''],
-  solution: 'test '
+  attempts: [],
+  currentWord: '',
+  setCurrentWord: (_: string) => { return },
+  submit: () => {},
+  solution: 'test ',
 })
 
 function App() {
   const solution = "water"
 
-  const context = useContext(gameContext)
+  const [currentWord, setCurrentWord] = useState("");
+  const [attempts, setAttempts] = useState<string[]>([]);
 
-  const [gameState, setGameState] = useState({
-    currentLetterIndex: 0,
-    currentWord: ['', '', '', '', ''],
-    solution: solution
-  })
+  const submit = () => {
+    setAttempts([...attempts, currentWord]);
+    setCurrentWord('');
+  }
 
   return (
-    <gameContext.Provider value={gameState}>
+    <gameContext.Provider value={{
+      attempts,
+      currentWord, setCurrentWord: (newWord: string) => {setCurrentWord(newWord)},
+      submit,
+      solution
+    }}>
       <h1>Demo</h1>
       <div className="card game-input">
-        <LetterInput />
-        <LetterInput />
-        <LetterInput />
-        <LetterInput />
-        <LetterInput />
+        <div className='flex'>
+          <input type="text" className='input'/>
+          <button type="submit" className='btn btn-primary' onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            submit();
+          }} >Play</button>
+        </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
