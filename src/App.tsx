@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { gameContext } from './gameContext'
 import './App.css'
+import { PreviousAttempts } from './PreviousAttempts';
 
 enum GameState {
   playing,
@@ -40,9 +41,7 @@ function App() {
     }}>
       <h1>Demo</h1>
       <div className="card game-input">
-        <div>
-          {attempts.map((x, i) => <p key={i}>{x}</p>)}
-        </div>
+        <PreviousAttempts />
         <div className='flex'>
           <input type="text" className='input'
             disabled={gameState == GameState.finished}
