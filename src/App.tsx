@@ -1,32 +1,11 @@
-//import { useState } from 'react'
-import { createContext, useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { gameContext } from './gameContext'
 import './App.css'
 
-function LetterInput() {
-  const [letter, setLetter] = useState("")
-  return <input type="text" onInput={
-    e => { setLetter((e.target as HTMLInputElement).value) }
-  } value={letter} />
-}
-
-type GameContext = {
-  attempts: string[]
-  currentWord: string
-  setCurrentWord: (newWord: string) => void
-  submit: () => void
-  solution: string
 enum GameState {
   playing,
   finished,
 }
-
-const gameContext = createContext<GameContext>({
-  attempts: [],
-  currentWord: '',
-  setCurrentWord: (_: string) => { return },
-  submit: () => {},
-  solution: 'test ',
-})
 
 function App() {
   const solution = "water"
