@@ -15,6 +15,9 @@ type GameContext = {
   setCurrentWord: (newWord: string) => void
   submit: () => void
   solution: string
+enum GameState {
+  playing,
+  finished,
 }
 
 const gameContext = createContext<GameContext>({
@@ -30,6 +33,19 @@ function App() {
 
   const [currentWord, setCurrentWord] = useState("");
   const [attempts, setAttempts] = useState<string[]>([]);
+  const [gameState, setGameState] = useState<GameState>(GameState.playing)
+
+  useEffect(() => {
+    console.log(gameState)
+  }, [gameState])
+
+  useEffect(() => {
+    console.log(attempts.length)
+
+    if (attempts.length >= 5) {
+      setGameState(GameState.finished);
+    }
+  }, [attempts])
 
   const submit = () => {
     setAttempts([...attempts, currentWord]);
@@ -50,12 +66,15 @@ function App() {
         </div>
         <div className='flex'>
           <input type="text" className='input'
+            disabled={gameState == GameState.finished}
             onInput={(e) => {setCurrentWord((e.target as HTMLInputElement).value)}} value={currentWord}/>
-          <button type="submit" className='btn btn-primary' onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            submit();
-          }} >Play</button>
+          <button type="submit" className='btn btn-primary'
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              submit();
+            }}
+            disabled={gameState == GameState.finished}>Play</button>
         </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
