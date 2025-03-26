@@ -30,6 +30,9 @@ function App() {
 
   const submit = () => {
     setAttempts([...attempts, currentWord]);
+    if (currentWord == solution) {
+      setGameState(GameState.finished);
+    }
     setCurrentWord('');
   }
 
