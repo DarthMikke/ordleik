@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { gameContext } from './gameContext'
 import './App.css'
 import { PreviousAttempts } from './PreviousAttempts';
+import { validate } from './validate';
 
 enum GameState {
   playing,
@@ -39,7 +40,6 @@ function App() {
       submit,
       solution
     }}>
-      <h1>Demo</h1>
       <div className="card game-input">
         <PreviousAttempts />
         <div className='flex'>
@@ -54,13 +54,13 @@ function App() {
             }}
             disabled={gameState == GameState.finished}>Play</button>
         </div>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        { gameState == GameState.finished &&
+            (attempts[attempts.length - 1] == solution
+              ? <div className="p-3 rounded-2 mb-2 bg-success text-light">Congratulations, you won!</div>
+              : <div className="p-3 rounded-2 mb-2 bg-warning text-dark">Good luck next time!</div>
+            )
+        }
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </gameContext.Provider>
   )
 }
