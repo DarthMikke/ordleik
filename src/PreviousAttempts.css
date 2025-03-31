@@ -34,7 +34,7 @@
 	border-radius: 3px;
 
 	color: var(--bs-secondary-color);
-	background-color: var(--bs-secondary-rgb);
+	background-color: var(--bs-secondary-bg-subtle);
 
 	text-transform: uppercase;
 	font-size: 20px;
@@ -46,9 +46,9 @@
 }
 
 .single-attempt .letter-correct {
-	background-color: green;
+	background-color: rgb(var(--bs-success-rgb));
 }
 
 .single-attempt .letter-wrong_placement {
-	background-color: yellow;
+	background-color: rgb(var(--bs-warning-rgb));
 }

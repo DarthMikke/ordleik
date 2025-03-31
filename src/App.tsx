@@ -43,24 +43,26 @@ function App() {
       submit,
       solution
     }}>
-      <div className="card game-input">
+      <div className="game-input">
         <PreviousAttempts />
-        <div className='flex'>
-          <input type="text" className='input'
-            disabled={gameState == GameState.finished}
-            onInput={(e) => {setCurrentWord((e.target as HTMLInputElement).value)}} value={currentWord}/>
-          <button type="submit" className='btn btn-primary'
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              submit();
-            }}
-            disabled={gameState == GameState.finished}>Play</button>
-        </div>
+        <form className='form flex my-3' onSubmit={(_) => {submit()}}>
+          <div className='input-group'>
+            <input type="text" className='form-control'
+              disabled={gameState == GameState.finished}
+              onInput={(e) => {setCurrentWord((e.target as HTMLInputElement).value.toLowerCase())}} value={currentWord}/>
+            <button type="submit" className='btn btn-primary'
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                submit();
+              }}
+              disabled={gameState == GameState.finished || currentWord.length != 5}>Play</button>
+          </div>
+        </form>
         { gameState == GameState.finished &&
             (attempts[attempts.length - 1] == solution
-              ? <div className="p-3 rounded-2 mb-2 bg-success text-light">Congratulations, you won!</div>
-              : <div className="p-3 rounded-2 mb-2 bg-warning text-dark">Good luck next time!</div>
+              ? <div className="alert alert-success">Congratulations, you won!</div>
+              : <div className="alert alert-warning">Good luck next time!</div>
             )
         }
       </div>
