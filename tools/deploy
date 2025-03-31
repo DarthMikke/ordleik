@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+IMAGE=ghcr.io/darthmikke/ordleik
+VERSION=latest
+
+echo Will build image with following tag:
+echo $IMAGE:$VERSION
+
+docker buildx create --driver docker-container --name millim
+docker buildx use millim \
+&& docker login ghcr.io \
+&& docker buildx build \
+ --platform linux/amd64,linux/arm64,linux/arm64/v8 \
+ -t $IMAGE:$VERSION \
+ -t $IMAGE:latest \
+ --push \
+ .
