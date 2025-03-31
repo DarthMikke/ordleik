@@ -34,7 +34,9 @@ function SingleAttempt({attempt, index, ...props}: {attempt: string, index: numb
 
 export function PreviousAttempts() {
 	const { attempts } = useContext(gameContext);
+	const prompt = <p className="prompt">Start the game by guessing a 5-letter word:</p>
 	return <div className="previous-attempts">
-      {attempts.map((x, i) => <SingleAttempt key={i} index={i} attempt={x}/>)}
+		{ attempts.length == 0 && prompt }
+		{attempts.map((x, i) => <SingleAttempt key={i} index={i} attempt={x}/>)}
     </div>
 }

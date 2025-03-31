@@ -1,7 +1,15 @@
 .previous-attempts {
 	min-height: 240px;
-	min-width: 240px;
+	width: 240px;
 	position: relative;
+	display: flex;
+}
+
+.previous-attempts .prompt {
+	padding: 24px;
+	width: 100%;
+	align-self: center;
+	text-justify: center;
 }
 
 .single-attempt {
