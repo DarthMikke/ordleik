@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { gameContext } from './gameContext'
 import './App.css'
 import { PreviousAttempts } from './PreviousAttempts';
-import { validate } from './validate';
 
 enum GameState {
   playing,
