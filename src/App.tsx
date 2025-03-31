@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { gameContext } from './gameContext'
 import './App.css'
 import { PreviousAttempts } from './PreviousAttempts';
+import { useParams } from 'react-router';
+import { useWords } from './words';
 
 enum GameState {
   playing,
@@ -9,7 +11,9 @@ enum GameState {
 }
 
 function App() {
-  const solution = "water"
+  const wordList = useWords();
+  const { word } = useParams();
+  const solution = wordList[Number(word)];
 
   const [currentWord, setCurrentWord] = useState("");
   const [attempts, setAttempts] = useState<string[]>([]);
